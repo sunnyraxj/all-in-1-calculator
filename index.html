@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>daily need calculator</title>
+  <link rel="stylesheet" href="style.css" />
+    <link rel="icon" href="https://i.pinimg.com/736x/51/60/04/5160040dabb0440dc310f612079bcbb5.jpg" type="image/png">       
+
+</head>
+<body>
+  <div class="container">
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <h2>daily need's</h2>
+        <button class="close-btn" onclick="toggleSidebar()">×</button>
+      </div>
+      <ul>
+        <li class="active" onclick="showCalculator('mrp')">MRP Calculator</li>
+        <li onclick="showCalculator('percentage')">Exam Percentage</li>
+        <li onclick="showCalculator('discount')">Discount Calculator</li>
+        <li onclick="showCalculator('age')">Age Calculator</li>
+        <li onclick="showCalculator('standard')">Calculator</li>
+      </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="content">
+      <div class="topbar">
+        <button class="menu-btn" onclick="toggleSidebar()">☰</button>
+        <h1>MRP Calculator</h1>
+      </div>
+
+      <!-- Standard Calculator -->
+      <div class="calculator" id="standard-calculator" style="display: none;">
+        <div class="calculator-header">
+          <h3>Calculator</h3>
+          <p class="subtitle">Basic arithmetic operations</p>
+        </div>
+
+        <div class="standard-calculator">
+          <div class="calc-display">
+            <div class="calc-expression" id="calc-expression">0</div>
+            <div class="calc-result" id="calc-result">0</div>
+          </div>
+          <div class="calc-buttons">
+            <button class="calc-btn function" onclick="clearCalculator()">C</button>
+            <button class="calc-btn function" onclick="deleteLastChar()">⌫</button>
+            <button class="calc-btn function" onclick="appendToExpression('%')">%</button>
+            <button class="calc-btn operator" onclick="appendToExpression('/')">÷</button>
+            
+            <button class="calc-btn number" onclick="appendToExpression('7')">7</button>
+            <button class="calc-btn number" onclick="appendToExpression('8')">8</button>
+            <button class="calc-btn number" onclick="appendToExpression('9')">9</button>
+            <button class="calc-btn operator" onclick="appendToExpression('*')">×</button>
+            
+            <button class="calc-btn number" onclick="appendToExpression('4')">4</button>
+            <button class="calc-btn number" onclick="appendToExpression('5')">5</button>
+            <button class="calc-btn number" onclick="appendToExpression('6')">6</button>
+            <button class="calc-btn operator" onclick="appendToExpression('-')">−</button>
+            
+            <button class="calc-btn number" onclick="appendToExpression('1')">1</button>
+            <button class="calc-btn number" onclick="appendToExpression('2')">2</button>
+            <button class="calc-btn number" onclick="appendToExpression('3')">3</button>
+            <button class="calc-btn operator" onclick="appendToExpression('+')">+</button>
+            
+            <button class="calc-btn number" onclick="appendToExpression('0')">0</button>
+            <button class="calc-btn number" onclick="appendToExpression('.')">.</button>
+            <button class="calc-btn equals" onclick="calculateResult()">=</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- MRP Calculator -->
+      <div class="calculator" id="mrp-calculator">
+        <div class="calculator-header">
+          <h3>MRP Calculator</h3>
+          <p class="subtitle">Convert between price and weight</p>
+        </div>
+
+        <div class="mrp-input-container">
+          <label>MRP per KG (₹):</label>
+          <input type="number" id="mrp" placeholder="e.g. 100" oninput="calculateMRP()" />
+        </div>
+
+        <div class="mrp-calculations">
+          <div class="calculation-box">
+            <h4>₹ to Grams</h4>
+            <input type="number" id="amountInput" placeholder=" ₹ amount" oninput="calculateMRP()" />
+            <div class="result-display">
+              <div class="result-icon">⚖️</div>
+              <div class="result-content">
+                <span class="result-label">Weight</span>
+                <span class="result-value" id="weightResult">-</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="calculation-box">
+            <h4>Grams to ₹</h4>
+            <input type="number" id="gramInput" placeholder=" weight in grams" oninput="calculateMRP()" />
+            <div class="result-display">
+              <div class="result-icon">₹</div>
+              <div class="result-content">
+                <span class="result-label">Price</span>
+                <span class="result-value" id="priceResult">-</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Percentage Calculator -->
+      <div class="calculator" id="percentage-calculator" style="display: none;">
+        <div class="calculator-header">
+          <h3>Exam Percentage</h3>
+          <p class="subtitle">Calculate your percentage from marks</p>
+        </div>
+
+        <div class="percentage-container">
+          <div class="input-group">
+            <label>Total Marks</label>
+            <input type="number" id="total-marks" placeholder="Enter total marks" min="0" oninput="calculatePercentage()" />
+          </div>
+
+          <div class="input-group">
+            <label>Marks Obtained</label>
+            <input type="number" id="marks-obtained" placeholder="Enter marks obtained" min="0" oninput="calculatePercentage()" />
+          </div>
+
+          <div class="result-container">
+            <div class="result-box">
+              <span class="result-label">Percentage</span>
+              <span class="result-value" id="percentageResult">-</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Discount Calculator -->
+      <div class="calculator" id="discount-calculator" style="display: none;">
+        <div class="calculator-header">
+          <h3>Discount Calculator</h3>
+          <p class="subtitle">Calculate final price after discount</p>
+        </div>
+
+        <div class="discount-container">
+          <div class="input-group">
+            <label>Original Price (₹)</label>
+            <input type="number" id="original-price" placeholder="Enter original price" min="0" oninput="calculateDiscount()" />
+          </div>
+
+          <div class="input-group">
+            <label>Discount Percentage (%)</label>
+            <input type="number" id="discount-percent" placeholder="Enter discount percentage" min="0" max="100" oninput="calculateDiscount()" />
+          </div>
+
+          <div class="result-container">
+            <div class="result-display">
+              <div class="result-content">
+                <div class="result-row">
+                  <span class="result-label">Original:</span>
+                  <span class="result-value" id="originalPriceResult">-</span>
+                </div>
+                <div class="result-row">
+                  <span class="result-label">Discount:</span>
+                  <span class="result-value" id="discountAmountResult">-</span>
+                </div>
+                <div class="result-row">
+                  <span class="result-label">Final:</span>
+                  <span class="result-value final" id="finalPriceResult">-</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Age Calculator -->
+      <div class="calculator" id="age-calculator" style="display: none;">
+        <div class="calculator-header">
+          <h3>Age Calculator</h3>
+          <p class="subtitle">Calculate your exact age in years, months, and days</p>
+        </div>
+        
+        <div class="date-input-container">
+          <div class="input-group">
+            <label>Date of Birth</label>
+            <div class="date-inputs">
+              <div class="input-wrapper">
+                <input type="number" id="birth-day" placeholder="DD" min="1" max="31" />
+                <span class="input-label">Day</span>
+              </div>
+              <div class="input-wrapper">
+                <select id="birth-month">
+                  <option value="">MM</option>
+                  <option value="0">Jan</option>
+                  <option value="1">Feb</option>
+                  <option value="2">Mar</option>
+                  <option value="3">Apr</option>
+                  <option value="4">May</option>
+                  <option value="5">Jun</option>
+                  <option value="6">Jul</option>
+                  <option value="7">Aug</option>
+                  <option value="8">Sep</option>
+                  <option value="9">Oct</option>
+                  <option value="10">Nov</option>
+                  <option value="11">Dec</option>
+                </select>
+                <span class="input-label">Month</span>
+              </div>
+              <div class="input-wrapper">
+                <input type="number" id="birth-year" placeholder="YYYY" min="1900" max="2100" />
+                <span class="input-label">Year</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="ageResult" class="age-result">
+          <div class="result-item">
+            <span class="result-value" id="years">-</span>
+            <span class="result-label">Years</span>
+          </div>
+          <div class="result-item">
+            <span class="result-value" id="months">-</span>
+            <span class="result-label">Months</span>
+          </div>
+          <div class="result-item">
+            <span class="result-value" id="days">-</span>
+            <span class="result-label">Days</span>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
