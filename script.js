@@ -391,4 +391,46 @@ function updateDisplay() {
   expressionElement.textContent = currentExpression;
   resultElement.textContent = lastResult;
 }
+
+// Add keyboard support
+document.addEventListener('keydown', function(event) {
+  const key = event.key;
+  
+  // Number keys
+  if (/^[0-9]$/.test(key)) {
+    appendToExpression(key);
+  }
+  // Operators
+  else if (['+', '-', '*', '/', '%'].includes(key)) {
+    appendToExpression(key);
+  }
+  // Decimal point
+  else if (key === '.') {
+    appendToExpression('.');
+  }
+  // Enter key for calculation
+  else if (key === 'Enter') {
+    calculateResult();
+  }
+  // Backspace for deletion
+  else if (key === 'Backspace') {
+    deleteLastChar();
+  }
+  // Escape key for clear
+  else if (key === 'Escape') {
+    clearCalculator();
+  }
+});
+
+// Add focus styles for keyboard navigation
+document.querySelectorAll('.calc-btn').forEach(button => {
+  button.addEventListener('focus', function() {
+    this.style.outline = '2px solid #2e7d32';
+    this.style.outlineOffset = '2px';
+  });
+  
+  button.addEventListener('blur', function() {
+    this.style.outline = 'none';
+  });
+});
   

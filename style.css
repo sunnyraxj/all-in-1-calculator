@@ -2,10 +2,13 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
   }
   body {
     font-family: Arial, sans-serif;
     background-color: #f1f1f1;
+    font-size: 16px;
+    line-height: 1.5;
   }
   .container {
     display: flex;
@@ -149,7 +152,153 @@
     }
     
     .calculator {
+      padding: 20px;
+      margin: 10px;
+      border-radius: 12px;
+    }
+
+    .menu-btn {
+      font-size: 28px;
+      padding: 8px;
+    }
+
+    .topbar h1 {
+      font-size: 1.8rem;
+    }
+
+    input {
       padding: 15px;
+      font-size: 18px;
+      margin: 12px 0;
+    }
+
+    button {
+      padding: 15px 25px;
+      font-size: 18px;
+      border-radius: 8px;
+    }
+
+    .sidebar {
+      width: 280px;
+    }
+
+    .sidebar ul li {
+      padding: 15px 20px;
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+
+    .calculator-header h3 {
+      font-size: 2rem;
+    }
+
+    .subtitle {
+      font-size: 1.1rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .calculator {
+      padding: 15px;
+      margin: 8px;
+    }
+
+    .menu-btn {
+      font-size: 32px;
+    }
+
+    .topbar h1 {
+      font-size: 1.6rem;
+    }
+
+    input {
+      padding: 18px;
+      font-size: 20px;
+    }
+
+    button {
+      padding: 18px 30px;
+      font-size: 20px;
+    }
+
+    .calc-btn {
+      min-height: 60px;
+      font-size: 24px;
+    }
+
+    .result-display {
+      padding: 20px;
+    }
+
+    .result-value {
+      font-size: 24px;
+    }
+
+    .result-label {
+      font-size: 18px;
+    }
+
+    .date-inputs {
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .input-wrapper {
+      width: 100%;
+    }
+
+    .date-inputs input,
+    .date-inputs select {
+      padding: 18px;
+      font-size: 20px;
+    }
+  }
+  
+  /* Touch-friendly improvements */
+  button, 
+  input, 
+  select,
+  .calc-btn,
+  .sidebar ul li {
+    cursor: pointer;
+    touch-action: manipulation;
+  }
+
+  button:active,
+  .calc-btn:active {
+    transform: scale(0.98);
+  }
+
+  /* Improved contrast and readability */
+  .result-value {
+    font-weight: 600;
+  }
+
+  .result-label {
+    font-weight: 500;
+  }
+
+  .calculator-header h3 {
+    font-weight: 700;
+  }
+
+  /* Larger touch targets for mobile */
+  @media (max-width: 768px) {
+    .calc-buttons {
+      gap: 12px;
+    }
+
+    .calc-btn {
+      min-height: 55px;
+    }
+
+    .result-display {
+      margin: 15px 0;
+    }
+
+    .input-group label {
+      font-size: 1.2rem;
+      margin-bottom: 15px;
     }
   }
   

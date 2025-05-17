@@ -6,7 +6,13 @@
   <title>daily need calculator</title>
   <link rel="stylesheet" href="style.css" />
     <link rel="icon" href="https://i.pinimg.com/736x/51/60/04/5160040dabb0440dc310f612079bcbb5.jpg" type="image/png">       
-
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#000000">
+  <meta name="description" content="A modern calculator application for daily needs">
+  <link rel="apple-touch-icon" href="icons/icon-192x192.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="CalcBazar">
 </head>
 <body>
   <div class="container">
@@ -40,34 +46,34 @@
         </div>
 
         <div class="standard-calculator">
-          <div class="calc-display">
-            <div class="calc-expression" id="calc-expression">0</div>
-            <div class="calc-result" id="calc-result">0</div>
+          <div class="calc-display" role="region" aria-label="Calculator display">
+            <div class="calc-expression" id="calc-expression" role="textbox" aria-label="Current expression" aria-live="polite">0</div>
+            <div class="calc-result" id="calc-result" role="textbox" aria-label="Calculation result" aria-live="polite">0</div>
           </div>
           <div class="calc-buttons">
-            <button class="calc-btn function" onclick="clearCalculator()">C</button>
-            <button class="calc-btn function" onclick="deleteLastChar()">⌫</button>
-            <button class="calc-btn function" onclick="appendToExpression('%')">%</button>
-            <button class="calc-btn operator" onclick="appendToExpression('/')">÷</button>
+            <button class="calc-btn function" onclick="clearCalculator()" aria-label="Clear calculator" role="button" tabindex="0">C</button>
+            <button class="calc-btn function" onclick="deleteLastChar()" aria-label="Delete last character" role="button" tabindex="0">⌫</button>
+            <button class="calc-btn function" onclick="appendToExpression('%')" aria-label="Percentage" role="button" tabindex="0">%</button>
+            <button class="calc-btn operator" onclick="appendToExpression('/')" aria-label="Divide" role="button" tabindex="0">÷</button>
             
-            <button class="calc-btn number" onclick="appendToExpression('7')">7</button>
-            <button class="calc-btn number" onclick="appendToExpression('8')">8</button>
-            <button class="calc-btn number" onclick="appendToExpression('9')">9</button>
-            <button class="calc-btn operator" onclick="appendToExpression('*')">×</button>
+            <button class="calc-btn number" onclick="appendToExpression('7')" aria-label="Seven" role="button" tabindex="0">7</button>
+            <button class="calc-btn number" onclick="appendToExpression('8')" aria-label="Eight" role="button" tabindex="0">8</button>
+            <button class="calc-btn number" onclick="appendToExpression('9')" aria-label="Nine" role="button" tabindex="0">9</button>
+            <button class="calc-btn operator" onclick="appendToExpression('*')" aria-label="Multiply" role="button" tabindex="0">×</button>
             
-            <button class="calc-btn number" onclick="appendToExpression('4')">4</button>
-            <button class="calc-btn number" onclick="appendToExpression('5')">5</button>
-            <button class="calc-btn number" onclick="appendToExpression('6')">6</button>
-            <button class="calc-btn operator" onclick="appendToExpression('-')">−</button>
+            <button class="calc-btn number" onclick="appendToExpression('4')" aria-label="Four" role="button" tabindex="0">4</button>
+            <button class="calc-btn number" onclick="appendToExpression('5')" aria-label="Five" role="button" tabindex="0">5</button>
+            <button class="calc-btn number" onclick="appendToExpression('6')" aria-label="Six" role="button" tabindex="0">6</button>
+            <button class="calc-btn operator" onclick="appendToExpression('-')" aria-label="Subtract" role="button" tabindex="0">−</button>
             
-            <button class="calc-btn number" onclick="appendToExpression('1')">1</button>
-            <button class="calc-btn number" onclick="appendToExpression('2')">2</button>
-            <button class="calc-btn number" onclick="appendToExpression('3')">3</button>
-            <button class="calc-btn operator" onclick="appendToExpression('+')">+</button>
+            <button class="calc-btn number" onclick="appendToExpression('1')" aria-label="One" role="button" tabindex="0">1</button>
+            <button class="calc-btn number" onclick="appendToExpression('2')" aria-label="Two" role="button" tabindex="0">2</button>
+            <button class="calc-btn number" onclick="appendToExpression('3')" aria-label="Three" role="button" tabindex="0">3</button>
+            <button class="calc-btn operator" onclick="appendToExpression('+')" aria-label="Add" role="button" tabindex="0">+</button>
             
-            <button class="calc-btn number" onclick="appendToExpression('0')">0</button>
-            <button class="calc-btn number" onclick="appendToExpression('.')">.</button>
-            <button class="calc-btn equals" onclick="calculateResult()">=</button>
+            <button class="calc-btn number" onclick="appendToExpression('0')" aria-label="Zero" role="button" tabindex="0">0</button>
+            <button class="calc-btn number" onclick="appendToExpression('.')" aria-label="Decimal point" role="button" tabindex="0">.</button>
+            <button class="calc-btn equals" onclick="calculateResult()" aria-label="Calculate result" role="button" tabindex="0">=</button>
           </div>
         </div>
       </div>
@@ -237,5 +243,18 @@
   </div>
 
   <script src="script.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+          .then(registration => {
+            console.log('ServiceWorker registration successful');
+          })
+          .catch(err => {
+            console.log('ServiceWorker registration failed: ', err);
+          });
+      });
+    }
+  </script>
 </body>
 </html>
